@@ -1,0 +1,612 @@
+1. Linear Search 
+
+#include <iostream>
+using namespace std;
+
+int main()
+{
+ int arr[10];
+ int x;
+ cin>>x;
+ int i=0;
+ while(i<10){
+     cin>>arr[i];
+     i++;
+ }
+ int j=0;
+ while(j<10){
+     if(arr[j]==x){
+         cout<<"got element at position:- "<<j<<endl;
+         break;
+     }
+     j++;
+ }
+ if(j==10){
+     cout<<"not found"<<endl;
+ }
+}
+
+----------------------------------------------------------------------------------------
+
+2.Reverse an array
+
+#include <iostream>
+using namespace std;
+
+int main()
+{
+ int arr[10];
+ int i=0;
+ while(i<10){
+     cin>>arr[i];
+     i++;
+ }
+ int j=9;
+ while(j>=0){
+    cout<<arr[j] <<" ";
+ j--;
+ }
+}
+
+----------------------------------------------------------------------------------------
+
+3.Maximum element in array
+
+#include <iostream>
+using namespace std;
+
+int main()
+{
+ int arr[10];
+ int i=0;
+ while(i<10){
+     cin>>arr[i];
+     i++;
+ }
+ int a=arr[0];
+ int j=1;
+ while(j<10){
+     if(a<arr[j]){
+         a=arr[j];
+     }
+     j++;
+ }
+ cout<<a<<endl;
+}
+
+----------------------------------------------------------------------------------------
+
+4.Minimum element in array
+
+#include <iostream>
+using namespace std;
+
+int main()
+{
+ int arr[10];
+ int i=0;
+ while(i<10){
+     cin>>arr[i];
+     i++;
+ }
+ int a=arr[0];
+ int j=1;
+ while(j<10){
+     if(a>arr[j]){
+         a=arr[j];
+     }
+     j++;
+ }
+ cout<<a<<endl;
+}
+
+----------------------------------------------------------------------------------------
+
+5. Swap alternates in array
+
+#include <iostream>
+using namespace std;
+
+int main()
+{
+ int arr[10];
+ int i=0;
+ while(i<10){
+     cin>>arr[i];
+     i++;
+ }
+ 
+ int j=1;
+ while(j<10){
+    int a=arr[j-1];
+    arr[j-1]=arr[j];
+    arr[j]=a;
+     j+=2;
+ }
+ int k=0;
+ while(k<10){
+   cout<<arr[k]<<" ";
+     k++;
+ }
+}
+
+
+----------------------------------------------------------------------------------------
+
+6. Sort array of 0,1,2
+
+#include <iostream>
+using namespace std;
+
+int main()
+{
+ int arr[10];
+ int i=0;
+ while(i<10){
+     cin>>arr[i];
+     i++;
+ }
+ int a=0;
+ int b=0;
+ int c=0;
+ int j=0;
+ while(j<10){
+     if(arr[j]==0){
+         a++;
+     }
+     else if (arr[j]==1){
+         b++;
+     }
+     else
+     {
+         c++;
+     }
+     j++;
+ }
+ int k=0;
+ while(k<10){
+     if(a!=0){
+         arr[k]=0;
+         a--;
+     }
+     else if(b!=0)
+     {
+         arr[k]=1;
+         b--;
+     }
+     else {
+         arr[k]=2;
+         c--;
+     }
+   cout<<arr[k]<<" ";
+     k++;
+ }
+}
+
+----------------------------------------------------------------------------------------
+
+6. Move all negative to one side of array
+
+#include <iostream>
+using namespace std;
+
+int main()
+{
+ int arr[10];
+ int i=0;
+ while(i<10){
+     cin>>arr[i];
+     i++;
+ }
+ int j=0;
+ int k=0;
+ while(k<10){
+  if(arr[k]<0){
+      int a=arr[k];
+      arr[k]=arr[j];
+      arr[j]=a;
+      j++;
+  }
+  int l=0;
+ while(l<10){
+     
+   cout<<arr[l]<<" ";
+     l++;
+ }cout<<endl;
+     k++;
+ }
+}
+
+
+----------------------------------------------------------------------------------------
+
+7. Find union and intersection of 2 sorted arrays.
+
+UNION:-
+
+METHOD-1 (USING CP)
+
+#include <iostream>
+#include<bits/stdc++.h>
+using namespace std;
+
+int main()
+{
+    set<int>s;
+ int arr1[4];
+ int arr2[5];
+ int i=0;
+ while(i<4){
+     cin>>arr1[i];
+     i++;
+ }
+ int l=0;
+ while(l<5){
+     cin>>arr2[l];
+     l++;
+ }
+ int a=0;
+ int b=0;
+while(a<4 && b<5){
+    s.insert(arr1[a]);
+    s.insert(arr2[b]);
+    a++;
+    b++;
+}
+for (auto it:s){
+    cout<<it<<" ";
+}
+ 
+}
+
+METHOD-2 
+
+#include <iostream>
+using namespace std;
+
+int main()
+{
+
+ int arr1[4];
+ int arr2[5];
+ int i=0;
+ while(i<4){
+     cin>>arr1[i];
+     i++;
+ }
+ int l=0;
+ while(l<5){
+     cin>>arr2[l];
+     l++;
+ }
+ int a=0;
+ int b=0;
+while(a<4 && b<5){
+   if(arr1[a]<arr2[b]){
+       cout<<arr1[a];
+       a++;
+   }
+ 
+   else if(arr1[a]>arr2[b]){
+       cout<<arr2[b];
+       b++;
+   }
+ 
+   else if(arr1[a]==arr2[b]){
+       cout<<arr1[a];
+       a++;
+       b++;
+   }
+}
+}
+
+
+INTERSECTION:- 
+
+#include <iostream>
+using namespace std;
+
+int main()
+{
+
+ int arr1[4];
+ int arr2[5];
+ int i=0;
+ while(i<4){
+     cin>>arr1[i];
+     i++;
+ }
+ int l=0;
+ while(l<5){
+     cin>>arr2[l];
+     l++;
+ }
+ int a=0;
+ int b=0;
+while(a<4 && b<5){
+   if(arr1[a]<arr2[b]){
+       a++;
+   }
+ 
+   else if(arr1[a]>arr2[b]){
+       b++;
+   }
+ 
+   else if(arr1[a]==arr2[b]){
+       cout<<arr1[a];
+       a++;
+       b++;
+   }
+}
+}
+
+
+----------------------------------------------------------------------------------------
+
+8. Program to cyclically rotate array by one
+
+#include <iostream>
+using namespace std;
+
+int main()
+{
+
+ int arr[10];
+ int i=0;
+ while(i<10){
+     cin>>arr[i];
+     i++;
+ }
+ int a=arr[i-1];
+ int j=8;
+ while(j>=0){
+     arr[j+1]=arr[j];
+     j--;
+ }
+ arr[0]=a;
+ int k=0;
+ while(k<10){
+     cout<<arr[k];
+     k++;
+ }
+}
+
+----------------------------------------------------------------------------------------
+
+9. find duplicate in the array of N+1 integers.
+    arr={1,2,3,4,5,6,7,8,9,9,10}  //array size=11
+    finding which element is extra.
+
+#include <iostream>
+using namespace std;
+
+int main()
+{
+
+ int arr[11];
+ int i=0;
+ int n;
+ cin>>n;
+ int sum=0;
+ while(i<=n){
+     cin>>arr[i];
+     sum+=arr[i];
+     i++;
+ }
+int j=n*(n+1)/2;
+cout<<sum-j;
+}
+
+----------------------------------------------------------------------------------------
+
+10. find the pair that sum up to the given value.
+
+
+#include <iostream>
+using namespace std;
+
+int main()
+{
+    int sum;
+    cin>>sum;
+int arr[5];
+ int i=0;
+ while(i<5){
+     cin>>arr[i];
+     i++;
+ }
+ sort(arr,arr+5);
+ int j=0;
+ int k=4;
+ while(j<k){
+     if(arr[j]+arr[k]==sum){
+         cout<<arr[j]<<","<<arr[k]<<endl;
+     }
+     else if(arr[j]+arr[k]>sum){
+         k--;
+     }
+     else if(arr[j]+arr[k]<sum){
+         j++;
+     }
+ }
+}
+
+
+----------------------------------------------------------------------------------------
+
+11. find the triplet that sum up to the given value.
+
+#include <iostream>
+#include<bits/stdc++.h>
+using namespace std;
+
+int main()
+{
+    int sum;
+    cin>>sum;
+int arr[6];
+ int i=0;
+ while(i<6){
+     cin>>arr[i];
+     i++;
+ }
+ sort(arr,arr+6);
+ int l=0;
+ while(l<6){
+     
+    int j=l+1;
+    int k=5;
+ while(j<k){
+     if(arr[l]+arr[j]+arr[k]==sum){
+         cout<<arr[l]<<","<<arr[j]<<","<<arr[k]<<endl;
+         break;
+     }
+     else if(arr[l]+arr[j]+arr[k]>sum){
+         k--;
+     }
+     else if(arr[l]+arr[j]+arr[k]<sum){
+         j++;
+     }
+ }
+ l++;
+ }
+ 
+}
+
+
+----------------------------------------------------------------------------------------
+
+12. Check whether an array is palingdrome or not.
+
+#include <iostream>
+using namespace std;
+
+int main()
+{
+    int arr[10];
+    int i=0;
+    while(i<10){
+        cin>>arr[i];
+        i++;
+    }
+    int j=0;
+    int s=9;
+    while(j<5){
+        if(arr[j]!=arr[s-j]){
+            cout<<"not palingdrome";
+            break;
+        }
+        j++;
+    }
+    if(j==5){
+        cout<<"yes palingdrome";
+    }
+    
+}
+
+
+----------------------------------------------------------------------------------------
+
+13.minimum swaps required bring elements less equal k together (practiced on gfg-
+https://practice.geeksforgeeks.org/problems/minimum-swaps-required-to-bring-all-elements-less-than-or-equal-to-k-together4847/1/)
+
+int minSwap(int arr[], int n, int k) {
+       int j=0;
+    int tot=0;
+    while(j<n){
+        if(arr[j]<=k){
+            tot++;
+        }
+        j++;
+        
+    }
+    int l=0;
+    int sum=0;
+    while(l<tot){
+        if(arr[l]>k){
+            sum++;
+        }
+        l++;
+    }
+    
+   int final=sum;
+   int z=1;
+   int x=tot;
+   while(x<n){
+       if(arr[z-1]>k){
+           sum--;
+       }
+      if(arr[x]>k){
+          sum++;
+      }
+     final= min(sum,final);
+      z++;
+      x++;
+   }
+   return final;
+    }
+
+----------------------------------------------------------------------------------------
+
+14. Unique number of occurrences(practiced on leetcode- https://leetcode.com/problems/unique-number-of-occurrences/)
+
+
+ bool uniqueOccurrences(vector<int>& arr) {
+       unordered_map<int,int>mapp;
+        vector<int>a;
+        int i=0;
+        while(i<arr.size()){
+         mapp[arr[i]]++;
+            i++;
+        }
+        int j=0;
+      for(auto it:mapp){
+          a.push_back(it.second);
+          j++;
+      }
+        
+        sort(a.begin(),a.end());
+        int z=0;
+        while(z<j-1){
+            if(a[z]==a[z+1]){
+                return false;
+            }
+            z++;
+        }
+        return true;
+    }
+
+----------------------------------------------------------------------------------------
+
+15.Kadane's algorithm
+
+
+#include <iostream>
+#include<bits/stdc++.h>
+using namespace std;
+
+int main()
+{
+    int arr[10];
+    int i=0;
+    while(i<10){
+        cin>>arr[i];
+        i++;
+    }
+    int sum=0;
+    int total=INT_MIN;
+    int j=0;
+    while(j<10){
+        sum+=arr[j];
+        if(sum>total){
+            total=sum;
+        }
+        if(sum<0){
+            sum=0;
+        }
+        j++;
+    }
+    cout<<total;
+}
+
+----------------------------------------------------------------------------------------
