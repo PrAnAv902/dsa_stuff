@@ -1,0 +1,178 @@
+1.
+
+1
+121
+12321
+1234321
+123454321
+
+#include <iostream>
+
+using namespace std;
+
+int main()
+{
+   int n;
+   int m;
+   cin>>n;
+   cin>>m;
+   int i=0;
+   while(i<n){
+      
+       int j=0;
+       int x=0;
+       int z=1;
+       while(j<2*i+1){
+           if(z<i+1 && x==0)
+          cout<<z++;
+          else{
+             x=1;
+          cout<<z--; 
+          }
+          
+           j++;
+       }
+       cout<<endl;
+       i++;
+   }
+}
+
+------------------------------------------------------------------------
+2.
+
+A
+ABA
+ABCBA
+ABCDCBA
+ABCDEDCBA
+
+#include <iostream>
+
+using namespace std;
+
+int main()
+{
+   int n;
+   int m;
+   cin>>n;
+   cin>>m;
+   int i=0;
+   while(i<n){
+       int j=0;
+       int x=0;
+       int z=1;
+       char s='A';
+       while(j<2*i+1){
+           if(z<i+1 && x==0){
+                cout<<s;
+                z++;
+                s++;
+           }
+         
+          else{
+             x=1;
+          cout<<s; 
+          s--;
+          }
+          
+           j++;
+       }
+       cout<<endl;
+       i++;
+   }
+}
+------------------------------------------------------------------------
+3.
+
+    1
+   121
+  12321
+ 1234321
+123454321
+
+#include <iostream>
+
+using namespace std;
+
+int main()
+{
+   int n;
+   int m;
+   cin>>n;
+   cin>>m;
+   int i=0;
+   while(i<n){
+      int s=m-i-1;
+      while(s>=0){
+          cout<<" ";
+          s--;
+      }
+       int j=0;
+       int x=0;
+       int z=1;
+       while(j<2*i+1){
+           if(z<i+1 && x==0)
+          cout<<z++;
+          else{
+             x=1;
+          cout<<z--; 
+          }
+          
+           j++;
+       }
+       cout<<endl;
+       i++;
+   }
+}
+
+------------------------------------------------------------------------
+4.
+*****1*****
+****2*2****
+***3*3*3***
+**4*4*4*4**
+*5*5*5*5*5*
+
+
+#include <iostream>
+
+using namespace std;
+
+int main()
+{
+   int n;
+   int m;
+   cin>>n;
+   cin>>m;
+   int i=0;
+   while(i<n){
+       int k=m-i-1;
+       while(k>=0){
+           cout<<"*";
+           k--;
+       }
+       int j=0;
+       int x=0;
+       while(j<2*i+1){
+           if(x==0){
+               cout<<i+1;
+               x=1;
+           }
+           else if(x==1){
+               x=0;
+                cout<<"*";
+           }
+          
+           j++;
+       }
+       int z=m-i-1;
+       while(z>=0){
+           cout<<"*";
+           z--;
+       }
+       cout<<endl;
+       i++;
+   }
+}
+
+------------------------------------------------------------------------
