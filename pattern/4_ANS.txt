@@ -1,0 +1,176 @@
+1. Solid Diamond
+    * 
+   * * 
+  * * * 
+ * * * * 
+* * * * * 
+* * * * * 
+ * * * * 
+  * * * 
+   * * 
+    * 
+
+#include <iostream>
+
+using namespace std;
+
+int main()
+{
+   int n;
+   int m;
+   cin>>n;
+   cin>>m;
+   int i=0;
+   int l=0;
+   int f=0;
+   while(i<=n){
+       if(i<=n/2){
+          int s=m/2-i-1;
+       while(s>=0)
+       {
+           cout<<" ";
+           s--;
+       }
+       int j=0;
+       while(j<i){
+           cout<<"* ";
+           j++;
+       }
+       }
+       else
+       {
+         int r=0;
+         while(r<l){
+             cout<<" ";
+             r++;
+         }
+         int t=i-2*f-2;
+         while(t>=0){
+             cout<<"* ";
+             t--;
+         }
+         f++;
+         l++;
+       }
+      cout<<endl; 
+       i++;
+   }
+}
+
+----------------------------------------------------------------------------------
+
+2. Hollow Diamond
+
+    * 
+   * * 
+  *   * 
+ *     * 
+*       * 
+*       * 
+ *     * 
+  *   * 
+   * * 
+    * 
+
+#include <iostream>
+
+using namespace std;
+
+int main()
+{
+   int n;
+   int m;
+   cin>>n;
+   cin>>m;
+   int i=0;
+   int l=0;
+   int f=0;
+   while(i<=n){
+       if(i<=n/2){
+          int s=m/2-i-1;
+       while(s>=0)
+       {
+           cout<<" ";
+           s--;
+       }
+       int j=0;
+       while(j<i){
+           if(j==0 || j==i-1)
+           cout<<"* ";
+           else
+           cout<<"  ";
+           j++;
+       }
+       }
+       else
+       {
+         int r=0;
+         while(r<l){
+             cout<<" ";
+             r++;
+         }
+         int t=i-2*f-2;
+         while(t>=0){
+             if(t==0 || t==i-2*f-2)
+             cout<<"* ";
+             else 
+             cout<<"  ";
+             t--;
+         }
+         f++;
+         l++;
+       }
+      cout<<endl; 
+       i++;
+   }
+}
+
+
+----------------------------------------------------------------------------------
+
+3. Solid Half Diamond
+
+*
+**
+***
+****
+*****
+*****
+****
+***
+**
+*
+
+#include <iostream>
+
+using namespace std;
+
+int main()
+{
+   int n;
+   int m;
+   cin>>n;
+   cin>>m;
+   int i=0;
+   int f=0;
+   while(i<=n){
+       if(i<=n/2){
+       int j=0;
+       while(j<i){
+           cout<<"*";
+           j++;
+       }
+       }
+       else
+       {
+         int t=i-2*f-2;
+         while(t>=0){
+             cout<<"*";
+             t--;
+         }
+         f++;
+       }
+      cout<<endl; 
+       i++;
+   }
+}
