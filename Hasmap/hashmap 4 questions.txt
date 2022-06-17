@@ -1,0 +1,133 @@
+1. ALL subarray of sum k
+
+int findSubArraySum(int nums[], int N, int k)
+    {
+        unordered_map<int,int> mp;
+        int sum=0;
+        int ans=0;
+        
+        for(int i=0;i<N;i++)
+        {
+            sum+=nums[i];
+            if(sum==k)
+                ans++;
+            if(mp.find(sum-k)!=mp.end())
+                ans+=mp[sum-k];
+            mp[sum]++;
+        }
+        return ans;
+    }
+
+--------------------------------------------------------------------------------------------
+
+2. Longest subarray of sum k
+
+int lenOfLongSubarr(int a[],  int n, int k) 
+    { 
+       unordered_map<int,int>mapp; 
+    int i=0;
+   int sum=0;
+   int count=0;
+   while(i<n){
+       sum+=a[i];
+       if(sum==k){
+           if(i+1>count){
+                count=i+1;
+           }
+       }
+       if(mapp.find(sum-k)!=mapp.end()){
+           if(count<i-mapp[sum-k]){
+               count=i-mapp[sum-k];
+           }
+       }
+       if(!mapp[sum]){
+            mapp[sum]=i;
+       }
+      
+       i++;
+   }
+   return count;
+    } 
+
+--------------------------------------------------------------------------------------------
+
+3. Find subarrays with equal 0s and 1s
+
+#include <bits/stdc++.h>
+ 
+using namespace std;
+ 
+int countSubarrWithEqualZeroAndOne(int arr[], int n)
+{
+    map<int, int> mp;
+    int sum = 0;
+    int count = 0;
+    for (int i = 0; i < n; i++) {
+       
+        if (arr[i] == 0)
+            arr[i] = -1;
+ 
+        sum += arr[i];
+ 
+        if (sum == 0)
+            count++;
+ 
+         
+        if (mp[sum])
+            count += mp[sum];
+       
+          
+        if (mp[sum] == 0)
+            mp[sum] = 1;
+        else
+            mp[sum]++;
+    }
+    return count;
+}
+ 
+int main()
+{
+    int arr[] = { 1, 0, 0, 1, 0, 1, 1 };
+ 
+    int n = sizeof(arr) / sizeof(arr[0]);
+ 
+    cout << "count="
+         << countSubarrWithEqualZeroAndOne(arr, n);
+}
+
+--------------------------------------------------------------------------------------------
+4. Largest subarray of 0's and 1's
+
+    int maxLen(int arr[], int n)
+    {
+        unordered_map<int,int>mapp;
+        int i=0;
+        int sum=0;
+        int ans=0;
+        while(i<n){
+            if(arr[i]==0)
+            arr[i]=-1;
+            
+            sum+=arr[i];
+            
+            if(sum==0)
+            {
+                if(i+1>ans)
+                ans=i+1;
+            }
+            if(mapp[sum])
+            {
+                if((i-mapp[sum]+1)>ans)
+                {
+                    ans=i-mapp[sum]+1;
+                }
+            }
+            if(!mapp[sum])
+            {
+                mapp[sum]=i+1;
+            }
+         
+            i++;
+        }
+    return ans;
+    }
