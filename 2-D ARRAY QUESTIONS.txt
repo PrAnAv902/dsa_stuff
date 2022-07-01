@@ -1,0 +1,148 @@
+1. Spiral matrix
+Input: matrix = [[1,2,3],[4,5,6],[7,8,9]]
+Output: [1,2,3,6,9,8,7,4,5]
+
+ 
+vector<int> spiralOrder(vector<vector<int>>& matrix) {
+        vector<int>ans;
+        int total=0;
+        int n=matrix.size();
+        
+       for(auto it:matrix){
+           for(auto it1:it)
+           {
+               total++;
+           }
+       }
+        int m=total/n;
+        int i=0;
+        int j=0;
+        while(total){
+            while(j<m && matrix[i][j]!=200){
+                ans.push_back(matrix[i][j]);
+                matrix[i][j]=200;
+                total--;
+                j++;
+            }
+            j--;
+            i++;
+            while(i<n && matrix[i][j]!=200){
+                ans.push_back(matrix[i][j]);
+                matrix[i][j]=200;
+                total--;
+                i++;
+            }
+            i--;
+            j--;
+            while(j>=0 && matrix[i][j]!=200){
+                ans.push_back(matrix[i][j]);
+                matrix[i][j]=200;
+                total--;
+                j--;
+            }
+            j++;
+            i--;
+            while(i>=0 && matrix[i][j]!=200){
+                ans.push_back(matrix[i][j]);
+                matrix[i][j]=200;
+                total--;
+                i--;
+            }
+            i++;
+            j++;
+        }
+        return ans;
+    }
+
+
+---------------------------------------------------------------------------------------------------------
+
+2. Transpose matrix
+
+Input:
+N = 4
+mat[][] = {{1, 1, 1, 1},
+           {2, 2, 2, 2}
+           {3, 3, 3, 3}
+           {4, 4, 4, 4}}
+Output: 
+{{1, 2, 3, 4},  
+ {1, 2, 3, 4}  
+ {1, 2, 3, 4}
+ {1, 2, 3, 4}} 
+
+ #include<bits/stdc++.h> 
+    void transpose(vector<vector<int>>& matrix, int n)
+    { 
+        int i=0;
+       for(auto &it:matrix){
+           int j=0;
+           for(auto &it1:it){
+               if(i<j){
+                   int swap=matrix[i][j];
+                   matrix[i][j]=matrix[j][i];
+                   matrix[j][i]=swap;
+               }
+               j++;
+           }
+           i++;
+       }
+    }
+
+
+---------------------------------------------------------------------------------------------------------
+
+3. Rotate 90 degree matrix (HINT: TRANSPOSING THE MATRIX WILL HELP) 
+
+
+#include <iostream>
+#include<bits/stdc++.h> 
+using namespace std;
+
+void transpose(vector<vector<int>>& matrix)
+    { 
+        int i=0;
+       for(auto &it:matrix){
+           int j=0;
+           for(auto &it1:it){
+               if(i<j){
+                   int swap=matrix[i][j];
+                   matrix[i][j]=matrix[j][i];
+                   matrix[j][i]=swap;
+               }
+               j++;
+           }
+           i++;
+       }
+    }
+void swapping(vector<vector<int>>& matrix,int n){
+    int i=0;
+       for(auto &it:matrix){
+           int j=0;
+           for(auto &it1:it){
+               if(j<n/2){
+                   int swap=matrix[i][j];
+                   matrix[i][j]=matrix[i][n-j-1];
+                   matrix[i][n-j-1]=swap;
+               }
+               j++;
+           }
+           i++;
+       }
+}
+int main()
+{
+    vector<vector<int>>matrix={ { 1, 2, 3, 4 },
+                      { 5, 6, 7, 8 },
+                      { 9, 10, 11, 12 },
+                      { 13, 14, 15, 16 } };
+    transpose(matrix); // transposing the matrix first
+    swapping(matrix,4); // swapping the (i,j)th element with (n-i-1,j)th element
+    for(auto it1:matrix){
+        for(auto it2:it1){
+            cout<<it2<<" ";
+        }
+        cout<<endl;
+    }
+}
+
