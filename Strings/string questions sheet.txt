@@ -1,0 +1,249 @@
+1. Reverse a String
+
+#include <iostream>
+
+using namespace std;
+
+int main()
+{
+    int n;
+    cin>>n;
+    char a[n];
+    cin>>a;
+    int start=0;
+    int end=n-1;
+    while(start<end){
+        int swap=a[start];
+        a[start]=a[end];
+        a[end]=swap;
+        start++;
+        end--;
+    }
+    cout<<a;
+}
+
+
+-------------------------------------------------------------------------------------------------
+
+2&3 (same) Check Palindrome   (https://bit.ly/3E55FvF) please check different requirments here.
+
+bool checkPalindrome(string s)
+{
+   string a;
+    int i=0;
+    while(i<s.size()){
+        if((48<=s[i] && s[i]<=57) || (97<=s[i] && s[i]<=122)){
+            a.push_back(s[i]);
+        }
+        else if(65<=s[i] && s[i]<=90){
+            a.push_back(s[i]+32);
+        }
+        i++;
+    }
+   int j=0;
+    int k=a.size()-1;
+    while(j<k){
+        if(a[j]!=a[k])return false;
+        j++;
+        k--;
+    }
+    return true;
+}
+
+-------------------------------------------------------------------------------------------------
+
+4. Reverse words
+
+Input: s = "the sky is blue"
+Output: "blue is sky the"
+
+
+
+string reverseWords(string &str) {
+        string a;
+       while(str.rfind(' ')!=string::npos){
+           int c=str.rfind(' ');
+           c++; 
+           while(c<str.size()){
+               a.push_back(str[c]);
+               c++;
+           }
+            c=str.rfind(' ');
+            a.push_back(' ');
+            str.erase(c,str.size()-c);
+           }
+           int z=0;
+           while(z<str.size()){
+               a.push_back(str[z]);
+               z++;
+           }
+           return a;
+       } 
+
+-------------------------------------------------------------------------------------------------
+
+5. Maximum occurring character
+
+char getMaxOccuringChar(string str)
+    {
+       map<char,int>mp;
+       int i=0;
+       while(i<str.size()){
+           mp[str[i]]++;
+           i++;
+       }
+       char ans;
+       int n=0;
+       for(auto it:mp){
+           if(it.second>n){
+               n=it.second;
+               ans=it.first;
+           }
+       }
+       return ans;
+    }
+
+-------------------------------------------------------------------------------------------------
+
+6. Replace Spaces  (extra)
+
+
+Sample Input 1:
+2
+Coding Ninjas Is A Coding Platform
+Hello World
+Sample Output 1:
+Coding@40Ninjas@40Is@40A@40Coding@40Platform
+Hello@40World
+
+
+
+string replaceSpaces(string &str){
+	while(str.find(' ')!=string::npos){
+        int a=str.find(' ');
+        str.erase(a,1);
+        str.insert(a,"@40");
+    }
+    return str;
+}
+
+-------------------------------------------------------------------------------------------------
+
+7. Remove All Occurrences of a Substring
+
+string removeOccurrences(string s, string part) {
+        while(s.find(part)!=string::npos){
+            int a=s.find(part);
+            s.erase(a,part.size());
+        }
+        return s;
+    }
+
+------------------------------------------------------------------------------------------------
+
+8. Remove All Adjacent Duplicates In String (this approach way better than mine)op
+
+Input: s = "abbaca"
+Output: "ca"
+
+
+string removeDuplicates(string s) {
+        string ans;
+        for(char &c:s){
+            if(ans.empty()) ans.push_back(c);
+            else{
+                if(ans.back()!=c) ans.push_back(c);
+                else ans.pop_back();
+            }
+        }
+        return ans;
+    }
+
+------------------------------------------------------------------------------------------------
+
+9. String Compression
+
+Input: chars = ["a","a","b","b","c","c","c"]
+Output: Return 6, and the first 6 characters of the input array should be: ["a","2","b","2","c","3"]
+Explanation: The groups are "aa", "bb", and "ccc". This compresses to "a2b2c3".
+
+
+int compress(vector<char>& chars) {
+        string a;
+        int i=0;
+        int j=0;
+        int t=0;
+        while(j<chars.size()){
+            if(chars[i]==chars[j]){
+                t++;
+            }
+            else{
+                a.push_back(chars[i]);
+                if(t>1){
+                     string x=to_string(t);
+                     int g=0;
+                     while(g<x.size()){
+                     a.push_back(x[g]);
+                     g++;
+                     }
+                }
+                t=1;
+                i=j;
+            }
+            if(j==chars.size()-1){
+                 a.push_back(chars[i]);
+                if(t>1){
+                     string x=to_string(t);
+                     int g=0;
+                     while(g<x.size()){
+                     a.push_back(x[g]);
+                     g++;
+                     }
+                 }
+            }
+            j++;
+        }
+        int f=0;
+        while(f<a.size()){
+            chars[f]=a[f];
+            f++;
+        }
+        return a.size();
+    }
+
+---------------------------------------------------------------------------------------------
+
+10. Permutation in Strings
+
+Input: s1 = "ab", s2 = "eidbaooo"
+Output: true
+Explanation: s2 contains one permutation of s1 ("ba").
+
+
+  bool checkInclusion(string s1, string s2) {
+        map<char,int>mapp;
+        map<char,int>mp;
+        int k=0;
+        while(k<s1.size()){
+            mapp[s1[k]]++;
+            k++;
+        }
+        int i=0;
+        int j=0;
+        while(j<s2.size()){
+           mp[s2[j]]++;
+            if(j-i+1<s1.size()){
+                j++;
+            }
+            else if(j-i+1==s1.size()){
+                if(mp==mapp){
+                    return true;
+                }
+                mp[s2[i]]--;
+                if(mp[s2[i]]==0) mp.erase(s2[i]);
+                i++;
+                j++;
+            }
+        }
+        return false;
+    }

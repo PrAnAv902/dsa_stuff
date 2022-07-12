@@ -1,0 +1,193 @@
+STRING ALL USEFUL FUNCTIONS
+#include <iostream>
+using namespace std;
+
+int main()
+{
+   string a;
+   cin>>a;
+   cout<<a.front()<<" "<<a.back()<<endl;
+   a.push_back('2');
+   cout<<a.back()<<endl;
+   a.insert(5,"ykk");
+   cout<<a<<endl;
+   a.erase(5,3);
+   cout<<a<<endl;
+   a.pop_back();
+   cout<<a<<endl;
+   cout<<a.find('2')<<endl;
+   cout<<a.rfind('4')<<endl;
+   cout<<a.substr(2,3)<<endl;
+   if(a.find("12345")==string::npos){
+       cout<<"NO matches"<<endl;
+   }
+   else{
+       cout<<a.find("12345")<<endl;
+       cout<<a.rfind("12345")<<endl;
+   }
+   cout<<"-----------------------"<<endl;
+   cout<<a.find_first_of("12345")<<endl;
+   cout<<a.find_last_of("12345")<<endl;
+   cout<<"-----------------------"<<endl;
+
+   
+   a.clear();
+   cout<<a<<endl;
+}
+
+----------------------------------------------------------------------------------------------------
+
+1. Reverse a char array
+
+#include <iostream>
+
+using namespace std;
+
+int main()
+{
+    int n;
+    cin>>n;
+    char a[n];
+    cin>>a;
+    int start=0;
+    int end=n-1;
+    while(start<end){
+        int swap=a[start];
+        a[start]=a[end];
+        a[end]=swap;
+        start++;
+        end--;
+    }
+    cout<<a;
+}
+
+----------------------------------------------------------------------------------------------------
+
+2. Anagrams
+
+Input:a = geeksforgeeks, b = forgeeksgeeks
+Output: YES
+Explanation: Both the string have samecharacters with
+        same frequency. So, both are anagrams.
+
+
+CODE:-
+bool isAnagram(string a, string b){
+      int arr[26]={0};
+      int i=0;
+      while(i<a.size()){
+          int l=a[i]-97;
+          arr[l]++;
+          i++;
+      }
+      int j=0;
+      while(j<b.size()){
+          int r=b[j]-97;
+          arr[r]--;
+          j++;
+      }
+      int k=0;
+      while(k<26){
+          if(arr[k]!=0){
+              return false;
+          }
+          k++;
+      }
+      return true;
+    }
+
+----------------------------------------------------------------------------------------------------
+
+3. Min Number of Flips
+
+Input:
+S = "0001010111" 
+Output: 2
+Explanation: We can flip the 1st and 8th bit 
+bit to have "0101010101"
+101.
+
+
+CODE:-
+int minFlips (string s)
+{
+    char b='0';
+    char c='1';
+    int a=s.size();
+  
+       int ans1=0;
+       int ans2=0;
+       int j=0;
+       while(j<a){
+           //counting the difference on both '101010' & '010101' cases
+           if(s[j]!=b){
+               ans1++;
+              
+           } 
+           if(s[j]!=c){
+               ans2++;
+               
+           } 
+           //switching 0 to 1 and 1 to 0
+           if(b=='0') b='1';
+               else b='0';
+           if(c=='0') c='1';
+               else c='0';
+           j++;
+       }
+       //returning the min value
+       return min(ans1,ans2);
+}
+
+----------------------------------------------------------------------------------------------------
+
+4. Implement strstr 
+
+Input:
+s = GeeksForGeeks, x = Fr
+Output: -1
+Explanation: Fr is not present in the
+string GeeksForGeeks as substring.
+
+
+CODE:-
+int strstr(string s, string x)
+{
+   int i=0;  
+   int b=x.size();
+   while(i<s.size()){
+           string c=s.substr(i,b);
+           if(c==x){
+               return i;
+       }
+       i++;
+   }
+   return -1;
+}
+
+
+OR
+
+ int strStr(string h, string n) {
+        if(h.find(n)!=string::npos){
+            int ans = h.find(n);
+            return ans;
+        }
+        return -1;
+    }
+
+----------------------------------------------------------------------------------------------------
+
+5. Rotate String
+
+Input: s = "abcde", goal = "cdeab"
+Output: true
+
+
+#include <bits/stdc++.h>
+    bool rotateString(string s, string goal) {
+        if(s.size()!=goal.size()) return false;
+      s+=s;
+       if(s.find(goal)==string::npos) return false;
+        else return true;
+    }
