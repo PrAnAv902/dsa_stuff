@@ -4,6 +4,9 @@ using namespace std;
 
 int main()
 {
+    string x,y;
+    cin>>x>>y;
+    cout<<x.compare(y)<<endl; //if output zero means strings same other than this output strings no same
    string a;
    cin>>a;
    cout<<a.front()<<" "<<a.back()<<endl;
@@ -30,7 +33,8 @@ int main()
    cout<<a.find_last_of("12345")<<endl;
    cout<<"-----------------------"<<endl;
 
-   
+   a.replace(0,1,x);
+   cout<<a<<endl;
    a.clear();
    cout<<a<<endl;
 }
