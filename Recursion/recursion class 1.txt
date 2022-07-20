@@ -1,0 +1,98 @@
+1. Factorial 
+
+#include <iostream>
+using namespace std;
+int factorial(int n){
+    if(n==1) return 1;
+    return n*factorial(n-1);
+}
+
+int main()
+{
+    int n;
+    cin>>n;
+    cout<<factorial(n);
+}
+
+
+----------------------------------------------------------------------------------------------------
+
+2. Printing numbers from (1->N)
+
+#include <iostream>
+using namespace std;
+void counting(int n){
+    if(n==0) return;
+    counting(n-1);
+    cout<<n;
+}
+
+int main()
+{
+    int n;
+    cin>>n;
+    counting(n);
+}
+
+----------------------------------------------------------------------------------------------------
+
+3.  Maximum number in an array
+
+#include <bits/stdc++.h>
+using namespace std;
+int maxelement(int arr[],int n){
+    if(n==0) return INT_MIN;
+    int a=maxelement(arr+1,n-1);
+    if(a<arr[0]) return arr[0];
+    else return a;
+}
+
+int main()
+{
+    int arr[10];
+    int i=0;
+    while(i<10){
+        cin>>arr[i];
+        i++;
+    }
+   cout<<maxelement(arr,10);
+}
+
+----------------------------------------------------------------------------------------------------
+
+4. Fast exponentiation
+
+#include <bits/stdc++.h>
+using namespace std;
+int fastexpo(int x,int n){
+    if(n==0) return 1;
+    int a=fastexpo(x,n/2);
+    if(n%2!=0) return a*a*x;
+    else return a*a;
+}
+
+int main()
+{
+    int x,n;
+    cin>>x>>n;
+    cout<<fastexpo(x,n);
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
