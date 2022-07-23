@@ -1,0 +1,151 @@
+1. Fibonacci
+#include <iostream>
+
+using namespace std;
+int fibonacci(int n){
+    if(n==0) return 0;
+    if(n==1) return 1;
+    return fibonacci(n-1)+fibonacci(n-2);
+    
+}
+int main()
+{
+   int n;
+   cin>>n;
+   cout<<fibonacci(n);
+}
+
+
+
+
+
+
+2. Climb stairs
+
+#include <iostream>
+
+using namespace std;
+int climbstairs(int n){
+   if(n==0) return 1;
+   if(n<0) return 0;
+   return climbstairs(n-1)+climbstairs(n-2);
+}
+int main()
+{
+   int n;
+   cin>>n;
+   cout<<climbstairs(n);
+}
+
+
+3. Check if array is sorted or not
+
+#include <iostream>
+using namespace std;
+bool issorted(int arr[],int n){
+    if(n==1 || n==0) return true;
+    if(arr[0]<=arr[1]) {
+        issorted(arr+1,n-1);
+    }
+    else{
+        return false;
+    }
+}
+int main()
+{
+   int arr[]={1,2,3,4,5,6,7,8,9};
+   cout<<issorted(arr,0);
+}
+
+
+
+4. Linear search
+
+#include <iostream>
+using namespace std;
+bool linearsearch(int arr[],int n,int k){
+   if(n==0) return false;
+   if(arr[0]==k) return true;
+   else linearsearch(arr+1,n-1,k);
+}
+int main()
+{
+   int arr[]={1,2,3,4,5,6,7,8,9};
+   cout<<linearsearch(arr,9,10);
+}
+
+
+5. Binary Search
+
+#include <iostream>
+using namespace std;
+bool binarysearch(int arr[],int i,int j,int n,int k){
+  if(i>j) return false;
+  int mid=(i+j)/2;
+  if(arr[mid]==k) return true;
+  else if(arr[mid]>k) binarysearch(arr,i,mid-1,n,k);
+  else binarysearch(arr,mid+1,j,n,k);
+}
+int main()
+{
+   int arr[]={1,2,3,4,5,6,7,8,9};
+   cout<<binarysearch(arr,0,8,9,10);
+}
+
+6. Reverse string
+
+#include <bits/stdc++.h>
+using namespace std;
+void reversestring(string &a,int i,int j){
+    if(i>j) return;
+    swap(a[i],a[j]);
+    reversestring(a,++i,--j);
+}
+
+
+int main()
+{
+   string a;
+   cin>>a;
+   reversestring(a,0,a.size()-1);
+   cout<<a;
+}
+
+7. Check palingdrome
+
+#include <bits/stdc++.h>
+using namespace std;
+bool checkpal(string &a,int i,int j){
+    if(i>j) return true;
+    if(a[i]!=a[j]) return false;
+    checkpal(a,++i,--j);
+}
+
+int main()
+{
+   string a;
+   cin>>a;
+   cout<<checkpal(a,0,a.size()-1);
+}
+
+
+8. bubble sort
+
+#include <bits/stdc++.h>
+using namespace std;
+
+void bubblesort(int arr[],int n){
+    if(n==0 || n==1) return;
+    for(int i=0;i<n;i++){
+        if(arr[i]>arr[i+1]){
+            swap(arr[i],arr[i+1]);
+        }
+    }
+    bubblesort(arr,n-1);
+}
+int main()
+{
+  int arr[]={9,8,7,6,5,4,3,2,1};
+  bubblesort(arr,9);
+  for(auto it:arr) cout<<it<<" ";
+}

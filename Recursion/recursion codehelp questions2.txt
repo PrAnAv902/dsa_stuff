@@ -1,0 +1,164 @@
+1. Merge Sort
+
+#include <bits/stdc++.h>
+using namespace std;
+
+void merge2sortedarrays(int *arr,int start,int end,int n){
+    vector<int>arr1;
+    vector<int>arr2;
+    int mid=(start+end)/2;
+    for(int i=start;i<=mid;i++){
+        arr1.push_back(arr[i]);
+    }
+    for(int i=mid+1;i<=end;i++){
+        arr2.push_back(arr[i]);
+    }
+    int i=0;
+    int j=0;
+    int k=start; //error created
+    while(i<arr1.size() && j<arr2.size()){
+        if(arr1[i]<arr2[j]){
+            arr[k]=arr1[i];
+            i++;
+        }
+        else{
+            arr[k]=arr2[j];
+            j++;
+        }
+        k++;
+    }
+    while(i<arr1.size()){
+        arr[k]=arr1[i];
+        i++;
+        k++;
+    }
+    while(j<arr2.size()){
+        arr[k]=arr2[j];
+        j++;
+        k++;
+    }
+}
+
+void mergesort(int *arr,int start,int end,int n){
+    if(start>=end) return;
+    int mid=(start+end)/2;
+    mergesort(arr,start,mid,n);
+    mergesort(arr,mid+1,end,n);
+    merge2sortedarrays(arr,start,end,n);
+}
+
+int main()
+{
+  int arr[]={9,8,7,6,5,4,3,2,1};
+  mergesort(arr,0,8,9);
+  for(auto it:arr) cout<<it<<" ";
+}
+
+-------------------------------------------------------------------------------------------------------
+
+2. Count inversion (merge sort example)*
+
+#include <bits/stdc++.h>
+using namespace std;
+
+int merge2sortedarrays(int *arr,int start,int end,int n){
+    vector<int>arr1;
+    vector<int>arr2;
+    int mid=(start+end)/2;
+    for(int i=start;i<=mid;i++){
+        arr1.push_back(arr[i]);
+    }
+    for(int i=mid+1;i<=end;i++){
+        arr2.push_back(arr[i]);
+    }
+    int count=0;
+    int i=0;
+    int j=0;
+    int k=start;  
+    while(i<arr1.size() && j<arr2.size()){
+        if(arr1[i]<arr2[j]){
+            arr[k]=arr1[i];
+            i++;
+        }
+        else{
+            count+=arr1.size()-i;
+            arr[k]=arr2[j];
+            j++;
+        }
+        k++;
+    }
+    while(i<arr1.size()){
+        arr[k]=arr1[i];
+        i++;
+        k++;
+    }
+    while(j<arr2.size()){
+        arr[k]=arr2[j];
+        j++;
+        k++;
+    }
+    return count;
+}
+
+int mergesort(int *arr,int start,int end,int n){
+    if(start>=end) return 0;
+    int count=0;
+    int mid=(start+end)/2;
+    count+=mergesort(arr,start,mid,n);
+    count+=mergesort(arr,mid+1,end,n);
+    count+=merge2sortedarrays(arr,start,end,n);
+    return count;
+}
+
+int main()
+{
+  int arr[]={1, 20,6, 4, 5};
+  cout<<mergesort(arr,0,4,5);
+}
+
+-------------------------------------------------------------------------------------------------------
+
+3. Quick sort
+
+#include <bits/stdc++.h>
+using namespace std;
+int partition(int *arr,int start,int end){
+    int x=0;
+    for(int i=start+1;i<=end;i++){
+        if(arr[start]>=arr[i]){
+            x++;
+        }
+    }
+    x+=start; //error created
+    swap(arr[x],arr[start]);
+    int i=start;
+    int j=end;
+    //errored loop
+    while(i<x && j>x){
+        while(arr[i] <= arr[x]) 
+        {
+            i++;
+        }
+
+        while(arr[j] > arr[x]) {
+            j--;
+        }
+
+        if(i < x && j > x) {
+            swap(arr[i++], arr[j--]);
+        }
+    }
+    return x;
+}
+void quicksort(int *arr,int start ,int end){
+    if(start>=end) return;
+    int p=partition(arr,start,end);
+    quicksort(arr,start,p-1,n);
+    quicksort(arr,p+1,end,n);
+}
+int main()
+{
+    int arr[]={9,1,7,6,2,3,4,5,8};
+    quicksort(arr,0,8);
+    for(auto it:arr) cout<<it<<" ";
+}
