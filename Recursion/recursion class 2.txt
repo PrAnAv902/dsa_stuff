@@ -1,0 +1,43 @@
+1. Coin change problem
+
+#include <iostream>
+using namespace std;
+
+int totalways(int coins[],int n,int amount,int x){
+    if(amount==0) return 1;
+    else if(amount<0) return 0;
+    int ways=0;
+    for(int i=x;i<n;i++){
+        ways+=totalways(coins,n,amount-coins[i],i);
+    }
+    return ways;
+}
+
+int main()
+{
+    int amount;
+    cin>>amount;
+    int n=2;
+    int coins[]={1,2};
+    cout<<totalways(coins,n,amount,0);
+}
+
+------------------------------------------------------------------------------------------------------
+
+2. Optimal game strategy
+
+#include <bits/stdc++.h>
+
+using namespace std;
+int optimalstrat(int arr[],int i,int j){
+    if(i>j) return 0;
+    
+    int a=arr[i]+min(optimalstrat(arr,i+2,j),optimalstrat(arr,i+1,j-1));
+    int b=arr[j]+min(optimalstrat(arr,i+1,j-1),optimalstrat(arr,i,j-2));
+    return max(a,b);
+}
+int main()
+{
+   int arr[]={5,3,7,10};
+   cout<<optimalstrat(arr,0,3);
+}
