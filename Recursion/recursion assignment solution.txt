@@ -1,0 +1,302 @@
+1. Reverse String
+
+Input: s = ["h","e","l","l","o"]
+Output: ["o","l","l","e","h"]
+
+
+ void solve(int start,int end,vector<char>& s){
+        if(start>=end){
+            return;
+        }
+        swap(s[start],s[end]);
+        solve(start+1,end-1,s);
+    }
+    void reverseString(vector<char>& s) {
+        int start=0;
+        int end=s.size()-1;
+        solve(start,end,s);
+    }
+
+
+------------------------------------------------------------------------------------------------
+
+2. Power of Four
+
+   Input: n = 16        Input: n = 5         Input: n = 1
+   Output: true         Output: false        Output: true
+
+
+  bool solution(int n,long long sum){
+        if(sum==n){
+            return true;
+        }
+        else if(sum>n){
+            return false;
+        }
+        else{
+            return solution(n,sum*4);
+          
+        }
+    }
+    bool isPowerOfFour(int n) {
+        return solution(n,1);
+    }
+
+------------------------------------------------------------------------------------------------
+
+3. Find the Winner of the Circular Game
+
+Input: n = 5, k = 2
+Output: 3
+Explanation: Here are the steps of the game:
+1) Start at friend 1.
+2) Count 2 friends clockwise, which are friends 1 and 2.
+3) Friend 2 leaves the circle. Next start is friend 3.
+4) Count 2 friends clockwise, which are friends 3 and 4.
+5) Friend 4 leaves the circle. Next start is friend 5.
+6) Count 2 friends clockwise, which are friends 5 and 1.
+7) Friend 1 leaves the circle. Next start is friend 3.
+8) Count 2 friends clockwise, which are friends 3 and 5.
+9) Friend 5 leaves the circle. Only friend 3 is left, so they are the winner.
+
+
+(Done without recursion) 
+
+int findTheWinner(int n, int k) {
+  vector<int>a;
+    int i=0;
+    while(i<n){
+        a.push_back(i+1);
+        i++;
+    }
+    int j=0;
+    int total=n;
+    int count=0;
+   while(total>1){
+       while(count<k){
+           if(a[j%n]!=-1){
+               count++;
+           }
+           if(count==k){
+               break;
+           }
+           j++;
+       }
+       a[j%n]=-1;
+       total--;
+       count=0; 
+       
+   }
+  for(auto it:a){
+      if(it!=-1)
+       return it;
+   }
+        return 0;
+    }
+
+------------------------------------------------------------------------------------------------
+
+4. Different Ways to Add Parentheses
+
+Input: expression = "2*3-4*5"
+Output: [-34,-14,-10,-10,10]
+Explanation:
+(2*(3-(4*5))) = -34 
+((2*3)-(4*5)) = -14 
+((2*(3-4))*5) = -10 
+(2*((3-4)*5)) = -10 
+(((2*3)-4)*5) = 10
+
+
+vector<int> rec(string& s, int start, int end){
+    vector<int> ans;  
+    for(int i = start; i <= end; i++){  
+        char c = s[i]; 
+        if(c == '*' || c == '+' || c== '-'){  
+            
+            vector<int> leftVal = rec(s, start, i - 1); 
+            vector<int> rightVal = rec(s, i + 1, end);
+          
+            for(auto lVal : leftVal){ 
+                for(auto rVal : rightVal){
+                    int temp;
+                    if(c=='*'){
+                        temp = lVal*rVal;
+                    }
+                    else if(c=='+'){
+                        temp = lVal+rVal;
+                    }
+                    else if(c=='-'){
+                        temp = lVal-rVal;
+                    }
+                    ans.push_back(temp); 
+                }
+            }
+        }
+    }                                                                                                 
+    if(ans.empty()) 
+        ans.push_back(stoi(s.substr(start, end - start + 1)));
+    return ans;
+}
+
+vector<int> diffWaysToCompute(string s) {
+    vector<int>res;
+    if(s.empty()) 
+        return res;
+        
+    return rec(s, 0, s.size() - 1);
+}
+
+------------------------------------------------------------------------------------------------
+
+5. Decode String
+
+Input: s = "3[a2[c]]"
+Output: "accaccacc"
+
+ string decodeString(string s, int& i){
+        string result;
+        while(i < s.length() && s[i] != ']'){
+            if(isdigit(s[i])){
+                int k=0;
+                while(i < s.length() && isdigit(s[i]))
+                    k = k*10 + s[i++] -'0';
+                i++;
+                string r = decodeString(s,i);
+                while(k-- > 0)
+                    result += r;
+                i++;
+            } else 
+                result +=s[i++];
+        }
+        return result;
+    }
+    string decodeString(string s) {
+        int i=0;
+        return decodeString(s, i);
+    }
+
+------------------------------------------------------------------------------------------------
+
+6. Predict the Winner
+
+Input: nums = [1,5,233,7]
+Output: true
+Explanation: Player 1 first chooses 1. Then player 2 has to choose between 5 and 7. No matter which number player 2 choose, player 1 can choose 233.
+Finally, player 1 has more score (234) than player 2 (12), so you need to return True representing player1 can win.
+
+
+int solve(vector<int>& nums,int i ,int j){
+       if(i>j){
+           return 0;
+       } 
+        int a=nums[i]+min(solve(nums,i+1,j-1),solve(nums,i+2,j));
+        int b=nums[j]+min(solve(nums,i,j-2),solve(nums,i+1,j-1));
+        return max(a,b);
+    }
+    bool PredictTheWinner(vector<int>& nums) {
+        int i=0;
+        int total=0;
+        while(i<nums.size()){
+            total+=nums[i];
+            i++;
+        }
+        int z=0;
+        int j=nums.size()-1;
+        int x=solve(nums,z,j);
+        if(total-x>x) return false;
+        else return true;
+    }
+
+------------------------------------------------------------------------------------------------
+
+7. Elimination Game
+
+   int leftTOright(int n){
+        if (n == 1) return 1;
+        if (n == 2) return 2;
+        return 2 * rightTOleft(n/2); 
+       //suppose n=7(odd) (1,2,3,4,5,6,7)=>(2,4,6)=>2*(1,2,3)
+       //suppose n=8(even) (1,2,3,4,5,6,7,8)=>(2,4,6,8)=>2*(1,2,3,4)
+       // in both cases element will get removed from left alternatively
+   }
+    
+    int rightTOleft(int n){
+        if (n == 1) return 1;
+        if (n == 2) return 1;
+        if (n%2 != 0)     
+            return 2 * leftTOright(n/2);  //suppose n=7(odd) (1,2,3,4,5,6,7)=>(2,4,6)=>2*(1,2,3)
+        else               
+            return 2 * leftTOright(n/2)-1; //suppose n=8(even) (1,2,3,4,5,6,7,8)=>(1,3,5,7)=>2*(1,2,3)-1
+    }
+    
+    int lastRemaining(int n) {   //main function
+        return leftTOright(n);
+    }
+
+------------------------------------------------------------------------------------------------
+
+8.  K-th Symbol in Grammar
+
+int kthGrammar(int n, int k) {
+        if(n==1) return 0;
+        int mid=pow(2,n-1)/2;
+        if(k<=mid){
+            return kthGrammar(n-1,k);
+        }
+        else{
+            return !kthGrammar(n-1,k-mid);
+        }
+    }
+
+------------------------------------------------------------------------------------------------
+
+9. Count Good Numbers
+ 
+int m=1e9+7;
+long long int f(long long int x,long long int n)
+{
+    if(n==0) return 1;
+    long long int a=f(x,n/2);
+    if(n%2!=0) return (a*a*x)%m;
+    else return (a*a)%m;
+
+}
+int countGoodNumbers(long long n) {
+   
+    long long int x=(n+1)/2;
+    long long ans1=f(5,x)%m;  //fast exponentiation of half values with 5^x
+    long long ans2=f(4,n-x)%m;  //fast exponentiation of half values with 4^x
+    return (ans1*ans2)%m;
+}
+
+------------------------------------------------------------------------------------------------
+
+
+10. Permutation Sequence
+
+"123"
+"132"
+"213"
+"231"
+"312"
+"321"
+
+Input: n = 3, k = 3
+Output: "213"
+
+
+string getPermutation(int n, int k) {
+        string nums;
+        int i=0;
+        while(i<n){
+            nums.push_back(i+1+48);
+            i++;
+        }
+        if(k==1) return nums;
+        do{ 
+            k--;
+        }
+        while(k>0 && next_permutation(nums.begin(),nums.end()));
+        return nums;
+    }
