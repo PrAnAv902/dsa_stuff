@@ -118,7 +118,7 @@ using namespace std;
 bool checkpal(string &a,int i,int j){
     if(i>j) return true;
     if(a[i]!=a[j]) return false;
-    checkpal(a,++i,--j);
+    return checkpal(a,++i,--j);
 }
 
 int main()
