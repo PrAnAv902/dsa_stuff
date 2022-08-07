@@ -173,20 +173,21 @@ vector<int> diffWaysToCompute(string s) {
 Input: s = "3[a2[c]]"
 Output: "accaccacc"
 
- string decodeString(string s, int& i){
+  string decodeString(string s, int& i){
         string result;
-        while(i < s.length() && s[i] != ']'){
+        while(i < s.length()){
             if(isdigit(s[i])){
                 int k=0;
-                while(i < s.length() && isdigit(s[i]))
-                    k = k*10 + s[i++] -'0';
+                while(isdigit(s[i]))  k = k*10 + s[i++] -'0';
                 i++;
-                string r = decodeString(s,i);
-                while(k-- > 0)
-                    result += r;
+                string r = decodeString(s,i);  //getting the string of inside bracket
+                while(k-- > 0) result += r;
+                } 
+                else if(s[i]==']'){ //most important condition this condition will give output of inner bracket recursion
                 i++;
-            } else 
-                result +=s[i++];
+                return result;
+            } 
+            else result +=s[i++];
         }
         return result;
     }
@@ -194,7 +195,6 @@ Output: "accaccacc"
         int i=0;
         return decodeString(s, i);
     }
-
 ------------------------------------------------------------------------------------------------
 
 6. Predict the Winner
