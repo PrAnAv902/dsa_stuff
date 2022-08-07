@@ -94,6 +94,25 @@ int findTheWinner(int n, int k) {
         return 0;
     }
 
+(using recursion)
+
+int solve(vector<int>& v,int k ,int index)
+{
+//base case
+if(v.size()==1) return v[0];
+//removing the kth element counting the current index also that's why k-1
+index =(index+k-1)%(v.size());
+v.erase(v.begin()+index);
+//applying recursion on remaining elements
+return solve(v,k,index);
+}
+
+int findTheWinner(int n, int k) {
+    int index=0;
+    vector<int> v;
+    for(int i=1;i<=n;i++) v.push_back(i);
+    return solve(v,k,index);
+}
 ------------------------------------------------------------------------------------------------
 
 4. Different Ways to Add Parentheses
