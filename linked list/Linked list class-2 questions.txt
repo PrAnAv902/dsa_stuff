@@ -1,0 +1,210 @@
+1. Reverse a linked list
+
+ListNode* reverseList(ListNode* head) {
+        if(head==NULL) return head;
+        ListNode* current=head;
+        ListNode* prev=NULL;
+        ListNode* nex=NULL;
+        while(current!=NULL){
+            ListNode* nex=current->next;
+            current->next=prev;
+            prev=current;
+            current=nex;
+        }
+        return prev;
+}
+
+----------------------------------------------------------------------------------------------------------
+
+2. Middle of the Linked List
+
+ListNode* middleNode(ListNode* head) {
+        ListNode *slow=head;
+        ListNode *fast=head;
+        while(fast!=NULL and fast->next!=NULL)
+        {
+            slow=slow->next;
+            fast=fast->next->next;
+        }
+        return slow;
+}
+
+
+----------------------------------------------------------------------------------------------------------
+
+3. Check Linked List is circular or not
+
+bool isCircular(Node *head)
+{
+    Node *temp=head;
+    while(temp!=NULL){
+       if(temp->next==head) return true;
+       temp=temp->next;
+    }
+  return false;
+}
+ 
+
+----------------------------------------------------------------------------------------------------------
+
+4. Reverse a Linked List in groups of given size
+
+node *reverse (node *head, int k)
+    { 
+        if(head==NULL) return NULL;
+        
+        node*cur=head;
+        node*prev=NULL;
+        int t=k;
+        while(t>0 && cur!=NULL){
+            node*nex=cur->next;
+            cur->next=prev;
+            prev=cur;
+            cur=nex;
+            t--;
+        }
+        
+        head->next=reverse(cur,k);
+        return prev;
+    }
+
+
+----------------------------------------------------------------------------------------------------------
+
+5. Reverse Nodes in k-Group (same question as 4 just one condition more in which you donot have to reverse the elements in that group if it is less than k)
+
+Input: head = [1,2,3,4,5], k = 3
+Output: [3,2,1,4,5]
+
+here last 2 elements are not reversed because number of elements i.e.,2 which is less than k=>(3).
+
+ ListNode* reverseKGroup(ListNode* head, int k) {
+        if(head==NULL) return NULL;
+        ListNode*cur=head;
+        ListNode*prev=NULL;
+        int t=k;
+        ListNode*tu=head;
+        while(t>0){
+            if(tu==NULL) break;
+            tu=tu->next;
+            t--;
+        }
+        if(t==0){
+            int s=k;
+            while(s>0 && cur!=NULL){
+            ListNode*nex=cur->next;
+            cur->next=prev;
+            prev=cur;
+            cur=nex;
+            s--;
+        }
+        }
+        else return head;
+         head->next=reverseKGroup(cur,k);
+        return prev;
+    }
+
+
+----------------------------------------------------------------------------------------------------------
+
+6. Palindrome Linked List
+
+  bool isPalindrome(ListNode* head) {
+        ListNode*slow=head;
+        ListNode*fast=head;
+        while(fast!=NULL && fast->next!=NULL){
+            slow=slow->next;
+            fast=fast->next->next;
+        }
+        ListNode*prev=NULL;
+        ListNode*cur=slow;
+        while(cur!=NULL){
+            ListNode* nex=cur->next;
+            cur->next=prev;
+            prev=cur;
+            cur=nex;
+        }
+     
+        while(prev!=NULL && head!=NULL){
+            if(head->val!=prev->val) return false;
+                prev=prev->next;
+                head=head->next;
+        }
+        return true;
+    }
+
+----------------------------------------------------------------------------------------------------------
+
+7.Sort linked list of 0,1,2's
+
+Node* sortList(Node *head)
+{
+   Node*temp=head;
+    int zero=0,one=0,two=0;
+    while(temp!=NULL){
+        if(temp->data==0) zero++;
+        if(temp->data==1) one++;
+        if(temp->data==2) two++;
+        temp=temp->next;
+    }
+    Node*x=head;
+     while(head!=NULL){
+         while(zero>0){
+             head->data=0;
+             zero--;
+             head=head->next;
+         }
+          while(one>0){
+             head->data=1;
+             one--;
+             head=head->next;
+         }
+          while(two>0){
+             head->data=2;
+             two--;
+             head=head->next;
+         }
+     } 
+    return x;
+}
+
+----------------------------------------------------------------------------------------------------------
+
+8. Merge Two Sorted Lists
+
+ ListNode* mergeTwoLists(ListNode* list1, ListNode* list2) {
+        if(list1==NULL && list2==NULL) return NULL; 
+        if(list1==NULL)return list2;
+        if(list2==NULL)return list1;
+      
+        ListNode *n =new ListNode(-1);
+        ListNode*tn=n;
+        ListNode*temp;
+        if(list1->val<=list2->val) temp=list1;
+        else temp=list2;
+        while(list1!=NULL && list2!=NULL){
+            if(list1->val <= list2->val){
+                tn->next=list1;
+                tn=list1;
+                list1=list1->next;
+            }
+            else{
+                tn->next=list2;
+                tn=list2;
+                list2=list2->next;
+            }
+        }
+        while(list1!=NULL){
+                tn->next=list1;
+                tn=list1;
+                list1=list1->next;
+        }
+        while(list2!=NULL){
+                tn->next=list2;
+                tn=list2;
+                list2=list2->next;
+        }
+        ListNode*head=n->next;
+        n->next=NULL;
+        return head;
+    }
