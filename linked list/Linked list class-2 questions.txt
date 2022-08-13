@@ -4,7 +4,6 @@ ListNode* reverseList(ListNode* head) {
         if(head==NULL) return head;
         ListNode* current=head;
         ListNode* prev=NULL;
-        ListNode* nex=NULL;
         while(current!=NULL){
             ListNode* nex=current->next;
             current->next=prev;
@@ -139,7 +138,7 @@ here last 2 elements are not reversed because number of elements i.e.,2 which is
 
 Node* sortList(Node *head)
 {
-   Node*temp=head;
+    Node*temp=head;
     int zero=0,one=0,two=0;
     while(temp!=NULL){
         if(temp->data==0) zero++;
@@ -179,9 +178,6 @@ Node* sortList(Node *head)
       
         ListNode *n =new ListNode(-1);
         ListNode*tn=n;
-        ListNode*temp;
-        if(list1->val<=list2->val) temp=list1;
-        else temp=list2;
         while(list1!=NULL && list2!=NULL){
             if(list1->val <= list2->val){
                 tn->next=list1;
