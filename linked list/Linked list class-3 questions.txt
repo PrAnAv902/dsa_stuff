@@ -1,0 +1,151 @@
+1. Return Nth node from end of linked list
+
+int getNthFromLast(Node *head, int n)
+{
+        int i=0;
+        int size=0;
+        Node* temp=head;
+        while(temp!=NULL){
+            size++;
+            temp=temp->next;
+        }
+        n=size-n;
+       if(n<0) return -1;
+        Node* z=head;
+        while(i<n){
+            i++;
+            z=z->next;
+        }
+       
+        return z->data;
+}
+
+-----------------------------------------------------------------------------------------------------------------
+
+2. Remove Nth Node From End of List (same as question1 only removing the kth element and returning the list again)
+
+ ListNode* removeNthFromEnd(ListNode* head, int n) {
+        if(head==NULL || head->next==NULL) return NULL;
+        int i=0;
+        int size=0;
+        ListNode* temp=head;
+        while(temp!=NULL){
+            size++;
+            temp=temp->next;
+        }
+        n=size-n;
+       if(n==0) {
+           head=head->next;
+           return head;
+       }
+        ListNode* z=head;
+        ListNode*r=NULL;
+        while(i<n){
+            i++;
+            r=z;
+            z=z->next;
+        }
+        r->next=z->next;
+        return head;
+    }
+
+-----------------------------------------------------------------------------------------------------------------
+
+3. Detect loop in a linked list
+
+Floyd cycle detection algorithm (part-1)
+Sir one (only returning true false if loop exist or not)
+
+  bool hasCycle(ListNode *head) {
+        if(head==NULL) return false;
+        ListNode*slow=head;
+        ListNode*fast=head;
+        while(fast!=NULL && fast->next!=NULL){ 
+            slow=slow->next;
+            fast=fast->next->next;
+             if(slow==fast){
+                 return true;
+             }         
+        }
+        return false;
+    }
+
+-----------------------------------------------------------------------------------------------------------------
+
+4. Detect and return the start of the loop if present.
+
+
+Floyd cycle detection algorithm (part-2)
+
+ListNode *detectCycle(ListNode *head) {
+        if(head==NULL) return NULL;
+        ListNode*slow=head;
+        ListNode*fast=head;
+        while(fast!=NULL && fast->next!=NULL){ 
+            slow=slow->next;
+            fast=fast->next->next;
+             if(slow==fast){
+                 ListNode* x=head;
+                 while(x!=slow){
+                     x=x->next;
+                     slow=slow->next;
+                 }
+                 return x;
+             }
+        }
+        return NULL;
+    }
+
+
+(My two more approaches) for this particular question
+ListNode *detectCycle(ListNode *head) {
+        map<ListNode*,bool>map;
+        ListNode*temp=head;
+        while(temp!=NULL){
+            if(map[temp]==true) return temp;
+            map[temp]=true;
+            temp=temp->next;
+        }
+        return NULL;
+    }
+
+
+ ListNode *detectCycle(ListNode *head) {
+        ListNode*temp=head;
+        while(temp!=NULL){
+            if(temp->val==INT_MIN)return temp;
+            temp->val=INT_MIN;
+            temp=temp->next;
+        }
+        return NULL;
+    }
+
+
+
+-----------------------------------------------------------------------------------------------------------------
+
+5. Detect and remove the loop in a linked list
+
+Floyd cycle detection algorithm (part-3)
+
+void removeLoop(Node* head)
+    {
+        Node*slow=head;
+        Node*fast=head;
+        while(fast!=NULL && fast->next!=NULL){ 
+            slow=slow->next;
+            fast=fast->next->next;
+             if(slow==fast){
+                 Node* x=head;
+                 while(x!=slow){
+                     x=x->next;
+                     slow=slow->next;
+                 }
+                 while(x!=NULL){
+                     if(x->next==slow){
+                         x->next=NULL;
+                         }
+                         x=x->next;
+                 }
+             }
+        }
