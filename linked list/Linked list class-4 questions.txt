@@ -1,0 +1,120 @@
+1.  Rotate List
+
+Input: head = [1,2,3,4,5], k = 2
+Output: [4,5,1,2,3]
+
+Input: head = [0,1,2], k = 4
+Output: [2,0,1]
+
+
+
+ListNode* rotateRight(ListNode* head, int k) {
+        if(head==NULL) return NULL;
+        ListNode* temp=head;
+        int i=0;
+        while(temp!=NULL){
+            i++;
+            temp=temp->next;
+        }
+        k=k%i;
+        if(i==1 || k==0) return head;
+        i=i-k;
+        int x=0;
+        ListNode* z=head;
+        ListNode* prev=NULL;
+        while(x<i){
+            prev=z;
+            z=z->next;
+            x++;
+        }
+        prev->next=NULL;
+        ListNode* q=z;
+        while(q->next!=NULL){
+            q=q->next;
+        }
+        q->next=head;
+        return z;
+    }
+
+-----------------------------------------------------------------------------------------------------------------
+
+2. Remove Zero Sum Consecutive Nodes from Linked List
+
+ ListNode* solve(ListNode*& head, bool& change){
+         if(head==NULL){
+             return head;
+         }   
+        int sum=0;
+        ListNode* temp=head;
+        while(temp!=NULL){
+            sum+=temp->val;
+            if(sum==0){
+                break;
+            }
+            temp=temp->next;
+        }
+        if(sum==0){
+            change=true;
+            return temp->next;
+        }
+        head->next=solve(head->next,change);
+        return head;
+    }
+    ListNode* removeZeroSumSublists(ListNode* head) {
+        while(true){
+            bool change=false;
+            head=solve(head,change);
+            if(change==false){
+                break;
+            }
+        }
+        return head;
+    }
+
+
+-----------------------------------------------------------------------------------------------------------------
+
+3. Find the Minimum and Maximum Number of Nodes Between Critical Points
+
+ vector<int> nodesBetweenCriticalPoints(ListNode* head) {
+       vector<int>a;
+        if(head==NULL || head->next==NULL || head->next->next==NULL){
+           a.push_back(-1);
+           a.push_back(-1);
+            return a;
+         }
+        int i=2;
+        ListNode*temp=head;
+        temp=temp->next;
+        ListNode*prev=head;
+        while(temp->next!=NULL){
+            int x=temp->val;
+            if(x<prev->val && x<temp->next->val){
+                a.push_back(i);
+            }
+            if(x>prev->val && x>temp->next->val){
+                a.push_back(i);
+            }
+            i++;
+            prev=temp;
+            temp=temp->next;
+        }
+        if(a.size()<2){
+           a.clear();
+           a.push_back(-1);
+           a.push_back(-1);
+            return a;
+        }
+      else{
+            vector<int>ans;
+            int ok=INT_MAX;
+            for(int i=0;i<a.size()-1;i++){
+                if(a[i+1]-a[i]<ok) ok=a[i+1]-a[i];
+            }
+            ans.push_back(ok);
+            ans.push_back(a[a.size()-1]-a[0]);
+            a.clear();
+            return ans;
+        }
+      return a;
+    }
